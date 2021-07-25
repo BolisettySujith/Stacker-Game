@@ -10,21 +10,32 @@ class Stacker {
   field StackerGame game;
 
   constructor Stacker new() {
-    let str = Array.new(6);
+    let str = Array.new(9);
     let str[0] = "WELCOME TO S-T-A-C-K-E-R";
     let str[1] = "------------------";
     let str[2] = "Stack blocks by pressing SPACE to lock the row in place";
     let str[3] = "Press 'p' to play, 'q' to quit.";
     let str[4] = "S-T-A-C-K-E-R";
     let str[5] = "Instructions :";
+    let str[6] = "Developed by 19AIE112-Group10 members";
+    let str[7] = "B.SUJITH        G.SABARINATH        M.MAHADEV";
+    let str[8] = "Govind Hrishikesh.N        P.PRUTHVI        VAISHNAV.G.M";
     return this;
   }
 
   method void run() {
     while (~(key = Constants.KEY_Q())) {
       do Screen.clearScreen();
-      do Output.moveCursor(10, 24);
+      do Output.moveCursor(6, 24);
       do Output.printString(str[4]);
+      do Output.moveCursor(7, 22);
+      do Output.printString(str[1]);
+      do Output.moveCursor(10, 12);
+      do Output.printString(str[6]);
+      do Output.moveCursor(13, 10);
+      do Output.printString(str[7]);
+      do Output.moveCursor(15, 4);
+      do Output.printString(str[8]);
       do Sys.wait(1500);
       do Screen.clearScreen();
       do Output.moveCursor(6, 18);
