@@ -1,0 +1,75 @@
+/**
+ *  This Class is used to model the stack as a 2D array  Creates an Array named stack based on certain conditions
+ */
+
+/**
+*  creates methods to add and also return the current level
+ *  Creates an Array named stack based on certain conditions
+ */
+class Stack {
+  field Array stack;
+
+  constructor Stack new()
+ {
+    var int index;
+    let stack = Array.new(Constants.LEVELS());
+    let index = 0;
+
+    while (index < Constants.LEVELS())
+ {
+      let stack[index] = Array.new(Constants.COLS());
+      let index = index + 1;
+    }
+    return this;
+  }
+
+  /** This method is used to add new row to the stack, keeping only blocks that are stackable */
+
+  method int add(Array row, int level)
+ {
+    var int blocksStacked, count;
+    var Array top, newTop;
+    let top = stack[level - 1];
+    let newTop = stack[level];
+    let count = 0;
+    let blocksStacked = 0;
+
+    if (level = 0) {
+      let newTop = stack[0];
+      while (count < Constants.COLS()) {
+        let newTop[count] = row[count];
+        let count = count + 1;
+      }
+      let blocksStacked = 3;
+    } else {
+      while (count < Constants.COLS()) {
+        let newTop[count] = top[count] & row[count];
+
+        if (newTop[count]) {
+          let blocksStacked = blocksStacked + 1;
+        }
+        let count = count + 1;
+      }
+    }
+    return blocksStacked;
+  }
+
+
+
+  method Array getRow(int currenrlevel)
+ {
+    return stack[currenrlevel];
+  }
+
+
+/**
+* This is a method which uses inbuilt function (deAlloc) which inturns makes the mammery management useful
+*/
+
+
+  method void dispose() 
+{
+    do Memory.deAlloc(this);
+    return;
+  }
+}

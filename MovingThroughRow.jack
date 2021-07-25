@@ -1,0 +1,94 @@
+class MovingThroughRow {
+
+  field int x; 
+  field int delay; 
+  field int direction; 
+  field int time; 
+  field int blocks; 
+  field Array row;
+
+  constructor MovingThroughRow new() {
+    let delay = 1000;
+    let time = 0;
+    let direction = 1;
+    let row = Array.new(Constants.COLS());
+    do setRow(2, 3);
+    do setLevel(0, blocks);
+    return this;
+  }
+
+  method void setRow(int index, int aBlocks) {
+    var int i;
+    let i = 0;
+    let x = index;
+    let blocks = aBlocks;
+
+    while (i < Constants.COLS()) {
+      if ((i > (x - 1)) & (i < (x + blocks))) {
+        let row[i] = true;
+      } else {
+        let row[i] = false;
+      }
+      let i = i + 1;
+    }
+    return;
+  }
+
+  method Array getRow() {
+    return row;
+  }
+
+  method void setLevel(int level, int aBlocks) {
+    do setDelay(level);
+    do setRow(2, aBlocks);
+    return;
+  }
+
+  
+  method void setDelay(int level) {
+    if (level = 1) {
+      let delay = 500;
+    }
+
+    if ((level > 1) & (level < 10)) {
+      let delay = delay - 43;
+    }
+
+    if (level = 10) {
+      let delay = 150;
+    }
+
+    if (level > 10) {
+      let delay = delay - 25;
+    }
+
+    return;
+  }
+
+  
+  method void move() {
+    if (time < delay) {
+      let time = time + 1;
+      return;
+    } else {
+      let time = 0;
+    }
+
+    if (x = (Constants.COLS() - blocks)) {
+      let direction = -1;
+    }
+
+    if (x = 0) {
+      let direction = 1;
+    }
+
+    let x = x + direction;
+    do setRow(x, blocks);
+    return;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+}
