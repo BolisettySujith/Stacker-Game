@@ -1,4 +1,4 @@
-// Implements drawing the games elements 
+// Drawer class for drawing GridLines and Blocks
 class Drawer {
 
   // Draws the grid 
